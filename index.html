@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="https://chrisrollins.github.io/Crystalline/crystalline.js"></script>
+	<script type="text/javascript" src="util.js"></script>
+	<script type="text/javascript" src="flashcards.js"></script>
+	<script type="text/javascript" src="events.js"></script>
+	<title>Flashcards</title>
+	<style type="text/css">
+		body
+		{
+			background-color: #446666;
+		}
+		#main_container
+		{
+			width: 1000px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		#main_container td
+		{
+			width: 250px;
+		}
+		#control_panel, .flashcard, .flashcard_creator
+		{
+			user-select: none;
+		}
+		#inactive_items
+		{
+			display: none;
+		}
+		tr
+		{
+			border: 1px solid #0000ff;
+		}
+		td
+		{
+			border: 1px solid #ff0000;
+			text-align: center;
+		}
+		#current_flashcard
+		{
+			position: fixed;
+			top: 10%;
+			left: 35%;
+			height: 85%;
+			width: 30%;
+			background-color: #222;
+			color: #fff;
+			transition: transform 700ms, background-color 200ms, border-color 200ms, top 200ms;
+			border-radius: 10px;
+			border: 20px #eee solid;
+		}
+		#displayed_word_container
+		{
+			font-size: 5em;
+		}
+		#card_answers_container
+		{
+			height: 20%;
+		}
+	</style>
+</head>
+<body>
+	<table id="main_container">
+		<tr id="control_panel">
+			<td>
+				<button id="add_card_button" class="control_panel_button">Add a flashcard</button>
+			</td>
+			<td>
+				<button id="show_cards_button" class="control_panel_button">Show current cards</button>
+			</td>
+			<td>
+				<button id="start_study_button" class="control_panel_button">Study</button>
+			</td>
+		</tr>
+		<tr id="display_containers">
+			<td id="flashcard_creator_display_container"></td>
+			<td id="show_cards_display_container"></td>
+			<td id="study_container"></td>
+		</tr>
+	</table>
+
+	<div id="inactive_items">
+
+		<div id="card_list"></div>
+
+		<table id="current_flashcard" class="flashcard">
+			<tr>
+				<td colspan="2" id="displayed_word_container"></td>
+			</tr>
+			<tr id="front_interface">
+				<td id="card_answers_container">
+					<input type="text" id="answer_input">
+					<button id="answer_button">answer</button>
+				</td>
+				<td id="card_buttons_container">
+					<button id="flip_button">flip</button>
+				</td>
+			</tr>
+			<tr id="back_interface" style="display: none;">
+				<td colspan="2"><button id="next_button">next</button></td>
+			</tr>
+		</table>
+
+		<table id="flashcard_creator">
+			<tr>
+				<td class="bar" colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<td><label>Native Word:</label></td><td><input id="input_native_word" type="text"/></td>			
+			</tr>
+			<tr>
+				<td><label>Study Word:</label></td><td><input id="input_study_word" type="text"/></td>	
+			</tr>
+			<tr>
+				<td><button id="finalize_card_button">add</button><button id="cancel_card_button">cancel</button></td>	
+			</tr>
+		</table>
+
+	</div>
+
+</body>
+</html>

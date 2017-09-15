@@ -48,6 +48,36 @@ const util = (function(){
 		compareCaseInsensitive: function(word1, word2)
 		{
 			return word1.toLowerCase() === word2.toLowerCase();
+		},
+		chainDelay: function(ms)
+		{
+			const queue = [];
+			repeat(0, ms);
+			function repeat(i, delay)
+			{
+				setTimeout(function()
+				{
+					if(i < queue.length)
+					{
+						queue[i].callback();
+						i++;
+						repeat(i, queue[i].delay);
+					}
+				}, delay);
+			}
+			function chain(callback)
+			{
+				if(typeof callback === "function")
+				{
+					queue.push({callback: callback, delay: ms});
+				}
+				else if(typeof callback === "number")
+				{
+					ms = callback;
+				}
+				return chain;
+			}
+			return chain;
 		}
 	};
 

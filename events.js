@@ -44,6 +44,7 @@
 					{
 						state.disableButton(0);
 						current_flashcard.style.top = "-1000px";
+						answer_input.value = "";
 						setTimeout(function()
 						{
 							current_flashcard.style.transition = "none";
@@ -60,8 +61,8 @@
 								current_flashcard.style.transition = "";
 								current_flashcard.style.top = "10%";
 								state.enableButton(0);
-							}, 400);
-						}, 400);
+							}, 200);
+						}, 200);
 
 					},
 					get flipped()
@@ -82,37 +83,36 @@
 								? state.study.cards[currentCardIndex].nativeWord
 								: state.study.cards[currentCardIndex].studyWord;
 							current_flashcard.style.transform = "rotateY(0deg)";
-						}, 700);
+							current_flashcard.style["background-color"] = "";
+						}, 150);
 
 						setTimeout(function()
 						{
 							current_flashcard.style["background-color"] = "#aaa";
-							// current_flashcard.style["border-color"] = "#aaa";
-						}, 200);
-
-						setTimeout(function()
-						{
-							current_flashcard.style["background-color"] = "";
-							// current_flashcard.style["border-color"] = "";
-						}, 700);
+						}, 50);
 
 						setTimeout(function()
 						{
 							state.enableButton(0);
-						}, 1000);
+						}, 200);
 					},
-					reset: function()
+					reset: function(shuffle = false)
 					{
 						cards = Flashcards.list;
+
+						for(let i = 0; shuffle && i < cards.length; i++)
+						{
+							const k = ~~(Math.random() * cards.length - i) + i;
+							const temp = cards[k];
+							cards[k] = cards[i];
+							cards[i] = temp;
+						}
+
 						currentCardIndex = 0;
 						flipped = false;
 						back_interface.style.display = "none:";
 						front_interface.style.display = "table-row";
 						displayed_word_container.innerText = state.study.cards[currentCardIndex].studyWord;
-					},
-					shuffle: function()
-					{
-						
 					}
 				};
 			})()
@@ -155,8 +155,7 @@
 				{	
 					perform: function()
 					{
-						state.study.reset();
-						state.study.shuffle();
+						state.study.reset(shuffle=true);
 					},
 					hide: state.shownElements,
 					show: current_flashcard,
@@ -168,6 +167,7 @@
 					perform: function()
 					{
 						state.study.flipped = !state.study.flipped;
+						Media.sound("sounds/card1.wav").play();
 					}
 				},
 				answer_button:
@@ -176,7 +176,37 @@
 					{
 						if(util.compareCaseInsensitive(answer_input.value, state.study.cards[state.study.currentCardIndex].nativeWord))
 						{
-							state.study.currentCardIndex = (state.study.currentCardIndex + 1) % state.study.cards.length;
+							state.disableButton(0);
+							util.chainDelay(50)
+							(function(){Media.sound("sounds/coin1.wav").play();})
+							(500)(function()
+							{
+								state.study.currentCardIndex = (state.study.currentCardIndex + 1) % state.study.cards.length;
+								Media.sound("sounds/card2.wav").play();
+							})
+							(50)(function()
+							{
+								state.enableButton(0);
+							})
+						}
+						else
+						{
+							util.chainDelay(50)
+							(function()
+							{
+								current_flashcard.style.filter = "blur(1px)";
+								Media.sound("sounds/card3.wav").play();
+							})
+							(function(){current_flashcard.style.left = "33.5%";})
+							(function(){current_flashcard.style.left = "36.5%";})
+							(function(){current_flashcard.style.left = "34%";})
+							(function(){current_flashcard.style.left = "36%";})
+							(function(){current_flashcard.style.left = "34.5%";})
+							(function(){current_flashcard.style.left = "35.5%";})
+							(function(){current_flashcard.style.left = "34.5%";})
+							(function(){current_flashcard.style.left = "35.5%";})
+							(function(){current_flashcard.style.left = "";})
+							(function(){current_flashcard.style.filter = "";})
 						}
 					}
 				},
@@ -186,6 +216,7 @@
 					{
 						state.study.flipped = false;
 						state.study.currentCardIndex = (state.study.currentCardIndex + 1) % state.study.cards.length;
+						Media.sound("sounds/card2.wav").play();
 					}
 				}
 			},

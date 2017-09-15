@@ -1,10 +1,12 @@
 Crystalline.init("cardList", []);
 Crystalline.init("cardCount", 0);
 Crystalline.bind("#card_list", "cardList");
+Crystalline.order("cardList", ["studyWord", "nativeWord", "remove"]);
 Crystalline.format("cardList", {
 	studyWord: {title: "Study Word"},
 	nativeWord: {title: "Native Word"},
-	score: {title: "Score"},
+	score: {showTitle: false, showValue: false},
+	remove: {showTitle: false, showValue: true, template: {tag: "button", className: "removeButton", id: "remove_{{id}}"}},
 	id: {showTitle: false, showValue: false}
 });
 
@@ -16,8 +18,28 @@ const Flashcards = (function()
 		if(typeof card.nativeWord !== "string" || typeof card.studyWord !== "string")
 			{ return false; }
 		card.id = Crystalline.data.cardCount++;
-		card.score = {};
+		card.score = 0;
+		card.remove = "Remove";
 		Crystalline.data.cardList.push(card);
+	}
+
+	function remove(id)
+	{
+		if(typeof id === "number")
+		{
+			for(let i = 0; id < Crystalline.data.cardList.length; i++)
+			{
+				const card = Crystalline.data.cardList[i];
+				if(card.id === id)
+				{
+					Crystalline.data.cardList.splice(i, 1);
+				}
+			}
+		}
+		else
+		{
+			console.error("Expected a number.");
+		}
 	}
 
 	return Object.freeze({
@@ -28,6 +50,10 @@ const Flashcards = (function()
 		get add()
 		{
 			return add.bind(null);
+		},
+		get remove()
+		{
+			return remove.bind(null);
 		}
 	});
 })();

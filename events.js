@@ -126,8 +126,18 @@
 
 	onmouseup = function(e)
 	{
-		const idMouseupEvents = {
-
+		const mouseupEvents = {
+			classes:
+			{
+				removeButton:
+				{
+					perform: function()
+					{
+						const idToRemove = util.extractInt(e.target.id);
+						Flashcards.remove(idToRemove);
+					}
+				}
+			},
 			ids:
 			{
 				add_card_button:
@@ -277,7 +287,7 @@
 						for(const id of util.array(ids))
 						{
 							const el = (typeof id === "string") ? document.querySelector(`#${id}`) : id;
-							idMouseupEvents.ids[el.id].disabled = true;
+							mouseupEvents.ids[el.id].disabled = true;
 							el.style.filter = "blur(1px)";
 							el.disabled = true;
 						}
@@ -289,7 +299,7 @@
 						for(const id of util.array(ids))
 						{
 							const el = (typeof id === "string") ? document.querySelector(`#${id}`) : id;
-							idMouseupEvents.ids[el.id].disabled = false;
+							mouseupEvents.ids[el.id].disabled = false;
 							el.style.filter = "";
 							el.disabled = false;
 						}
@@ -315,11 +325,23 @@
 			function()
 			{
 				const id = e.target.id;
-				if(!(idMouseupEvents.ids[id] || {disabled: true}).disabled)
+				const classes = e.target.className.split(" ");
+				if(!(mouseupEvents.ids[id] || {disabled: true}).disabled)
 				{
-					for(const func in idMouseupEvents.ids[id])
+					for(const func in mouseupEvents.ids[id])
 					{
-						idMouseupEvents.functions[func](idMouseupEvents.ids[id][func]);
+						mouseupEvents.functions[func](mouseupEvents.ids[id][func]);
+					}
+				}
+
+				for(const cl of classes)
+				{
+					if(!(mouseupEvents.classes[cl] || {disabled: true}).disabled)
+					{
+						for(const func in mouseupEvents.classes[cl])
+						{
+							mouseupEvents.functions[func](mouseupEvents.classes[cl][func]);
+						}
 					}
 				}
 			},
@@ -329,8 +351,8 @@
 			},
 			function()
 			{
-				idMouseupEvents.functions.enable(Object.keys(idMouseupEvents.ids));
-				idMouseupEvents.functions.hide(current_flashcard);
+				mouseupEvents.functions.enable(Object.keys(mouseupEvents.ids));
+				mouseupEvents.functions.hide(current_flashcard);
 			}
 		][e.button] || function(){})();
 	};

@@ -1,5 +1,17 @@
 const util = (function(){
 
+	const _extractNumber = function(str)
+	{
+		let num = "";
+		for(let i = 0; i < str.length; i++)
+		{
+			const chCode = str.charCodeAt(i);
+			if(chCode > 47 && chCode < 58 || chCode === 46)
+				{ num += str[i]; }
+		}
+		return this(num);
+	}
+
 	const funcs = {
 		getFunctionBody: function(f)
 		{
@@ -78,7 +90,9 @@ const util = (function(){
 				return chain;
 			}
 			return chain;
-		}
+		},
+		extractInt: _extractNumber.bind(parseInt),
+		extractFloat: _extractNumber.bind(parseFloat)
 	};
 
 	const obj = Object.create(null);

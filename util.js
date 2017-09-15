@@ -61,7 +61,7 @@ const util = (function(){
 					{
 						queue[i].callback();
 						i++;
-						repeat(i, queue[i].delay);
+						repeat(i, (queue[i] || {delay:0}).delay);
 					}
 				}, delay);
 			}

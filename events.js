@@ -110,7 +110,7 @@
 
 						currentCardIndex = 0;
 						flipped = false;
-						back_interface.style.display = "none:";
+						back_interface.style.display = "none";
 						front_interface.style.display = "table-row";
 						displayed_word_container.innerText = state.study.cards[currentCardIndex].studyWord;
 					}
@@ -119,9 +119,32 @@
 		};
 	})();
 
+	onmousemove = function(e)
+	{
+		mouse_tooltip.style.top = e.y + "px";
+		mouse_tooltip.style.left = (e.x + 20) + "px";
+	}
+
+	onmouseover = function(e)
+	{
+		const mouseTooltips = {
+			ids:
+			{
+				flashcard_container: "CLICK TO QUIT STUDY SESSION"
+			}
+		}
+
+		mouse_tooltip.innerText = (mouseTooltips.ids[e.target.id] || "");
+	}
+
+	onmouseout = function(e)
+	{
+		mouse_tooltip.innerText = "";
+	}
+
 	oncontextmenu = function(e)
 	{
-		e.preventDefault();
+		//e.preventDefault();
 	};
 
 	onmouseup = function(e)
@@ -139,7 +162,16 @@
 				}
 			},
 			ids:
-			{
+			{			
+				flashcard_container:
+				{
+					hide: flashcard_container,
+					perform: function()
+					{
+						mouseupEvents.functions.enable(Object.keys(mouseupEvents.ids));
+						mouse_tooltip.innerText = "";
+					}
+				},
 				add_card_button:
 				{
 					show: flashcard_creator
@@ -168,7 +200,7 @@
 						state.study.reset(shuffle=true);
 					},
 					hide: state.shownElements,
-					show: current_flashcard,
+					show: flashcard_container,
 					disable: [add_card_button, show_cards_button, start_study_button],
 
 				},
@@ -351,8 +383,7 @@
 			},
 			function()
 			{
-				mouseupEvents.functions.enable(Object.keys(mouseupEvents.ids));
-				mouseupEvents.functions.hide(current_flashcard);
+				console.log("right click");
 			}
 		][e.button] || function(){})();
 	};

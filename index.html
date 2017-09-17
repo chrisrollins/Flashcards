@@ -17,6 +17,7 @@
 			width: 1000px;
 			margin-left: auto;
 			margin-right: auto;
+			border: #00ff00 solid 1px;
 		}
 		#main_container td
 		{
@@ -56,6 +57,26 @@
 			border-radius: 10px;
 			border: 20px #eee solid;
 		}
+		#flashcard_inner_container
+		{
+			position: fixed;
+			top: 10%;
+			left: 35%;
+			height: 85%;
+			width: 30%;
+			background: rgba(0, 0, 0, 0.3);
+			border-radius: 10px;
+			border: 20px #000 none;
+		}
+		#flashcard_container
+		{
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: 100vh;
+			background: rgba(0, 0, 0, 0.3);
+		}
 		#displayed_word_container
 		{
 			font-size: 5em;
@@ -63,6 +84,15 @@
 		#card_answers_container
 		{
 			height: 20%;
+		}
+		#mouse_tooltip
+		{
+			position: fixed;
+			user-select: none;
+			font-size: 10px;
+			font-weight: bold;
+			font-family: "Arial Black", Gadget, sans-serif;
+			color: #ffdd66;
 		}
 	</style>
 </head>
@@ -90,23 +120,27 @@
 
 		<div id="card_list"></div>
 
-		<table id="current_flashcard" class="flashcard">
-			<tr>
-				<td colspan="2" id="displayed_word_container"></td>
-			</tr>
-			<tr id="front_interface">
-				<td id="card_answers_container">
-					<input type="text" id="answer_input">
-					<button id="answer_button">answer</button>
-				</td>
-				<td id="card_buttons_container">
-					<button id="flip_button">flip</button>
-				</td>
-			</tr>
-			<tr id="back_interface" style="display: none;">
-				<td colspan="2"><button id="next_button">next</button></td>
-			</tr>
-		</table>
+		<div id="flashcard_container">
+			<div id="flashcard_inner_container">
+			<table id="current_flashcard" class="flashcard">
+				<tr>
+					<td colspan="2" id="displayed_word_container"></td>
+				</tr>
+				<tr id="front_interface">
+					<td id="card_answers_container">
+						<input type="text" id="answer_input">
+						<button id="answer_button">answer</button>
+					</td>
+					<td id="card_buttons_container">
+						<button id="flip_button">flip</button>
+					</td>
+				</tr>
+				<tr id="back_interface" style="display: none;">
+					<td colspan="2"><button id="next_button">next</button></td>
+				</tr>
+			</table>
+			</div>
+		</div>
 
 		<table id="flashcard_creator">
 			<tr>
@@ -123,7 +157,10 @@
 			</tr>
 		</table>
 
+
+
 	</div>
 
+	<div id="mouse_tooltip"></div>
 </body>
 </html>

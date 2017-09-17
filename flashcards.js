@@ -6,7 +6,7 @@ Crystalline.format("cardList", {
 	studyWord: {title: "Study Word"},
 	nativeWord: {title: "Native Word"},
 	score: {showTitle: false, showValue: false},
-	remove: {showTitle: false, showValue: true, template: {tag: "button", className: "removeButton", id: "remove_{{id}}"}},
+	remove: {showTitle: false, showValue: true, template: {tag: "button", className: "removeButton small_button", id: "remove_{{id}}"}},
 	id: {showTitle: false, showValue: false}
 });
 
@@ -27,12 +27,13 @@ const Flashcards = (function()
 	{
 		if(typeof id === "number")
 		{
-			for(let i = 0; id < Crystalline.data.cardList.length; i++)
+			for(let i = 0; i < Crystalline.data.cardList.length; i++)
 			{
 				const card = Crystalline.data.cardList[i];
 				if(card.id === id)
 				{
 					Crystalline.data.cardList.splice(i, 1);
+					return;
 				}
 			}
 		}

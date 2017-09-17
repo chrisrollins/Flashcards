@@ -11,17 +11,48 @@
 		body
 		{
 			background-color: #446666;
+			font-family: Tahoma, Geneva, sans-serif;
+		}
+		button
+		{
+			background-color: #fafaba;
+			color: #777733;
+			border: solid 3px #888833;
+			border-radius: 15px;
+			font-size: 12px;
+			font-weight: bold;
+			width: 160px;
+			height: 30px;
+			transition: filter 200ms;
+		}
+		button:hover
+		{	
+			filter: brightness(1.15) contrast(1.15);
+		}
+		button:active
+		{
+			filter: brightness(1.3) contrast(1.2) blur(1px);
+		}
+		button:focus
+		{
+			outline: 0;
+		}
+		.small_button
+		{
+			font-size: 10px;
+			width: 120px;
+			height: 25px;
 		}
 		#main_container
 		{
-			width: 1000px;
+			width: 1260px;
 			margin-left: auto;
 			margin-right: auto;
 			border: #00ff00 solid 1px;
 		}
-		#main_container td
+		.main_container_td
 		{
-			width: 250px;
+			width: 400px;
 		}
 		#control_panel, #display_containers
 		{
@@ -30,6 +61,25 @@
 		#control_panel, .flashcard, .flashcard_creator
 		{
 			user-select: none;
+		}
+		#flashcard_creator
+		{
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		.flashcard_creator_section div
+		{
+			width: 180px;
+			height: 25px;
+			display: inline-block;
+		}
+		.flashcard_creator_section input
+		{
+			width: 170px;
+		}
+		#card_list
+		{
+			text-align: -webkit-center;
 		}
 		#inactive_items
 		{
@@ -56,6 +106,7 @@
 			transition: transform 150ms, background-color 100ms, border-color 100ms, top 200ms, left 50ms, filter 50ms;
 			border-radius: 10px;
 			border: 20px #eee solid;
+			box-shadow: 0px 0px 40px #000;
 		}
 		#flashcard_inner_container
 		{
@@ -99,20 +150,20 @@
 <body>
 	<table id="main_container">
 		<tr id="control_panel">
-			<td>
+			<td class="main_container_td">
 				<button id="add_card_button" class="control_panel_button">Add a flashcard</button>
 			</td>
-			<td>
+			<td class="main_container_td">
 				<button id="show_cards_button" class="control_panel_button">Show current cards</button>
 			</td>
-			<td>
+			<td class="main_container_td">
 				<button id="start_study_button" class="control_panel_button">Study</button>
 			</td>
 		</tr>
 		<tr id="display_containers">
-			<td id="flashcard_creator_display_container"></td>
-			<td id="show_cards_display_container"></td>
-			<td id="study_container"></td>
+			<td id="flashcard_creator_display_container" class="main_container_td"></td>
+			<td id="show_cards_display_container" class="main_container_td"></td>
+			<td id="study_container" class="main_container_td"></td>
 		</tr>
 	</table>
 
@@ -142,22 +193,20 @@
 			</div>
 		</div>
 
-		<table id="flashcard_creator">
-			<tr>
-				<td class="bar" colspan="2">&nbsp;</td>
-			</tr>
-			<tr>
-				<td><label>Native Word:</label></td><td><input id="input_native_word" type="text"/></td>			
-			</tr>
-			<tr>
-				<td><label>Study Word:</label></td><td><input id="input_study_word" type="text"/></td>	
-			</tr>
-			<tr>
-				<td><button id="finalize_card_button">add</button><button id="cancel_card_button">cancel</button></td>	
-			</tr>
-		</table>
-
-
+		<div id="flashcard_creator">
+			<div class="flashcard_creator_section">
+				<div><label>Front Word:</label></div>
+				<div><input id="input_native_word" type="text"/></div>
+			</div>
+			<div class="flashcard_creator_section">
+				<div><label>Back Word:</label></div>
+				<div><input id="input_study_word" type="text"/></div>
+			</div>
+			<div class="flashcard_creator_section">
+				<div><button id="finalize_card_button" class="small_button">add</button></div>
+				<div><button id="cancel_card_button" class="small_button">cancel</button></div>
+			</div>	
+		</div>
 
 	</div>
 

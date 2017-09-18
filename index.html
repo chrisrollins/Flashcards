@@ -8,10 +8,15 @@
 	<script type="text/javascript" src="events.js"></script>
 	<title>Flashcards</title>
 	<style type="text/css">
+		@font-face
+		{
+			font-family: 'FuturaThin';
+			src: url('Futura Thin.ttf');
+		}
 		body
 		{
 			background-color: #446666;
-			font-family: Tahoma, Geneva, sans-serif;
+			font-family: FuturaThin, Geneva, sans-serif;
 		}
 		button
 		{
@@ -23,25 +28,41 @@
 			font-weight: bold;
 			width: 160px;
 			height: 30px;
-			transition: filter 200ms;
+			transition: filter 1000ms;
+			transition-delay: filter 250ms;
+			line-height: 100%;
 		}
 		button:hover
 		{	
-			filter: brightness(1.15) contrast(1.15);
+			filter: brightness(1.25) contrast(1.1);
+			transition: filter 150ms;
 		}
 		button:active
 		{
-			filter: brightness(1.3) contrast(1.2) blur(1px);
+			filter: brightness(1.5) contrast(1.2);
 		}
 		button:focus
 		{
 			outline: 0;
 		}
+		input
+		{
+			font-weight: bold;
+			font-size: 12px;
+			background-color: #fafaba;
+			border: solid 3px #888833;
+		}
+		input:focus
+		{
+			filter: brightness(1.25) contrast(1.1);
+			transition: filter 150ms;
+			outline: 0;
+		}
 		.small_button
 		{
 			font-size: 10px;
-			width: 120px;
-			height: 25px;
+			width: 75px;
+			height: 20px;
 		}
 		#main_container
 		{
@@ -49,6 +70,20 @@
 			margin-left: auto;
 			margin-right: auto;
 			border: #00ff00 solid 1px;
+		}
+		#display_containers
+		{
+			margin-left: auto;
+			margin-right: auto;
+			width: 1260px;
+		}
+		.display_container
+		{
+			vertical-align: top;
+			display: inline-block;
+			width: 410px;
+			margin-left: 5px;
+			border: 1px solid #00ffff;
 		}
 		.main_container_td
 		{
@@ -66,16 +101,30 @@
 		{
 			padding-top: 10px;
 			padding-bottom: 10px;
+			padding-left: 70px;
 		}
 		.flashcard_creator_section div
 		{
-			width: 180px;
+			width: 100px;
 			height: 25px;
+			font-size: 18px;
 			display: inline-block;
 		}
 		.flashcard_creator_section input
 		{
 			width: 170px;
+		}
+		#flashcard_creator_buttons
+		{
+			margin-left: 10%;
+		}
+		#finalize_card_button:hover
+		{
+			filter: hue-rotate(50deg) saturate(1.5);
+		}
+		#cancel_card_button:hover, .removeButton:hover
+		{
+			filter: hue-rotate(-50deg) saturate(1.5);
 		}
 		#card_list
 		{
@@ -160,12 +209,12 @@
 				<button id="start_study_button" class="control_panel_button">Study</button>
 			</td>
 		</tr>
-		<tr id="display_containers">
-			<td id="flashcard_creator_display_container" class="main_container_td"></td>
-			<td id="show_cards_display_container" class="main_container_td"></td>
-			<td id="study_container" class="main_container_td"></td>
-		</tr>
 	</table>
+	<div id="display_containers">
+		<div id="flashcard_creator_display_container" class="display_container"></div>
+		<div id="show_cards_display_container" class="display_container"></div>
+		<div id="study_container" class="display_container"></div>
+	</div>
 
 	<div id="inactive_items">
 
@@ -196,15 +245,15 @@
 		<div id="flashcard_creator">
 			<div class="flashcard_creator_section">
 				<div><label>Front Word:</label></div>
-				<div><input id="input_native_word" type="text"/></div>
-			</div>
-			<div class="flashcard_creator_section">
-				<div><label>Back Word:</label></div>
 				<div><input id="input_study_word" type="text"/></div>
 			</div>
 			<div class="flashcard_creator_section">
-				<div><button id="finalize_card_button" class="small_button">add</button></div>
-				<div><button id="cancel_card_button" class="small_button">cancel</button></div>
+				<div><label>Back Word:</label></div>
+				<div><input id="input_native_word" type="text"/></div>
+			</div>
+			<div id="flashcard_creator_buttons">
+				<button id="finalize_card_button" class="small_button">add</button>
+				<button id="cancel_card_button" class="small_button">cancel</button>
 			</div>	
 		</div>
 

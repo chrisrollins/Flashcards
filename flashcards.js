@@ -3,8 +3,8 @@ Crystalline.init("cardCount", 0);
 Crystalline.bind("#card_list", "cardList");
 Crystalline.order("cardList", ["studyWord", "nativeWord", "remove"]);
 Crystalline.format("cardList", {
-	studyWord: {title: "Study Word"},
-	nativeWord: {title: "Native Word"},
+	studyWord: {title: "Front"},
+	nativeWord: {title: "Back"},
 	score: {showTitle: false, showValue: false},
 	remove: {showTitle: false, showValue: true, template: {tag: "button", className: "removeButton small_button", id: "remove_{{id}}"}},
 	id: {showTitle: false, showValue: false}
@@ -19,7 +19,7 @@ const Flashcards = (function()
 			{ return false; }
 		card.id = Crystalline.data.cardCount++;
 		card.score = 0;
-		card.remove = "Remove";
+		card.remove = "remove";
 		Crystalline.data.cardList.push(card);
 	}
 

@@ -220,7 +220,11 @@
 						{
 							state.disableButton(0);
 							util.chainDelay(50)
-							(function(){Media.sound("sounds/coin1.wav").play();})
+							(function()
+							{
+								answer_result_success.style.filter = "opacity(1)";
+								Media.sound("sounds/coin1.wav").play();
+							})
 							(500)(function()
 							{
 								state.study.currentCardIndex = (state.study.currentCardIndex + 1) % state.study.cards.length;
@@ -228,6 +232,7 @@
 							})
 							(50)(function()
 							{
+								answer_result_success.style.filter = "opacity(0)";
 								state.enableButton(0);
 							})
 						}
@@ -237,6 +242,7 @@
 							(function()
 							{
 								current_flashcard.style.filter = "blur(1px)";
+								answer_result_failure.style.filter = "opacity(1)";
 								Media.sound("sounds/card3.wav").play();
 							})
 							(function(){current_flashcard.style.left = "33.5%";})
@@ -248,7 +254,11 @@
 							(function(){current_flashcard.style.left = "34.5%";})
 							(function(){current_flashcard.style.left = "35.5%";})
 							(function(){current_flashcard.style.left = "";})
-							(function(){current_flashcard.style.filter = "";})
+							(function()
+							{
+								current_flashcard.style.filter = "";
+								answer_result_failure.style.filter = "opacity(0)";
+							})
 						}
 					}
 				},

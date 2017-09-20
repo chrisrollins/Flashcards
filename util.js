@@ -80,8 +80,14 @@ const util = (function(){
 			function chain(callback)
 			{
 				if(typeof callback === "function")
+					{ callback = [callback]; }
+				
+				if(Array.isArray(callback))
 				{
-					queue.push({callback: callback, delay: ms});
+					for(const func of callback)
+					{
+						queue.push({callback: func, delay: ms});
+					}
 				}
 				else if(typeof callback === "number")
 				{

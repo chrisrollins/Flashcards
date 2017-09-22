@@ -8,6 +8,11 @@
 	<script type="text/javascript" src="events.js"></script>
 	<title>Flashcards</title>
 	<style type="text/css">
+		*{
+			margin: 0px;
+			padding: 0px;
+			color: #fff;
+		}
 		@font-face
 		{
 			font-family: 'FuturaThin';
@@ -15,7 +20,7 @@
 		}
 		body
 		{
-			background-color: #446666;
+			background-color: #000;
 			font-family: FuturaThin, Geneva, sans-serif;
 		}
 		button
@@ -69,7 +74,22 @@
 			width: 1260px;
 			margin-left: auto;
 			margin-right: auto;
-			border: #00ff00 solid 1px;
+			/*border: #00ff00 solid 1px;*/
+		}
+		#main_container_outer
+		{
+			padding-top: 50px;
+			height: 300px;
+		}
+		#instructions
+		{
+			width: 350px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		#instructions h2
+		{
+			text-align: -webkit-center;
 		}
 		#display_containers
 		{
@@ -83,7 +103,7 @@
 			display: inline-block;
 			width: 410px;
 			margin-left: 5px;
-			border: 1px solid #00ffff;
+			/*border: 1px solid #00ffff;*/
 		}
 		.main_container_td
 		{
@@ -91,7 +111,7 @@
 		}
 		#control_panel, #display_containers
 		{
-			background-color: #fff;
+			/*background-color: #fff;*/
 		}
 		#control_panel, .flashcard, .flashcard_creator
 		{
@@ -136,11 +156,12 @@
 		}
 		tr
 		{
-			border: 1px solid #0000ff;
+
 		}
 		td
 		{
-			border: 1px solid #ff0000;
+			/*border-bottom: 1px solid #fff;*/
+			margin: 0px;
 			text-align: center;
 		}
 		#current_flashcard
@@ -218,23 +239,35 @@
 	</style>
 </head>
 <body>
-	<table id="main_container">
-		<tr id="control_panel">
-			<td class="main_container_td">
-				<button id="add_card_button" class="control_panel_button">Add a flashcard</button>
-			</td>
-			<td class="main_container_td">
-				<button id="show_cards_button" class="control_panel_button">Show current cards</button>
-			</td>
-			<td class="main_container_td">
-				<button id="start_study_button" class="control_panel_button">Study</button>
-			</td>
-		</tr>
-	</table>
-	<div id="display_containers">
-		<div id="flashcard_creator_display_container" class="display_container"></div>
-		<div id="show_cards_display_container" class="display_container"></div>
-		<div id="study_container" class="display_container"></div>
+	<div id="main_container_outer">
+		<table id="main_container">
+			<tr id="control_panel">
+				<td class="main_container_td">
+					<button id="add_card_button" class="control_panel_button">Add a flashcard</button>
+				</td>
+				<td class="main_container_td">
+					<button id="show_cards_button" class="control_panel_button">Show current cards</button>
+				</td>
+				<td class="main_container_td">
+					<button id="start_study_button" class="control_panel_button">Study</button>
+				</td>
+			</tr>
+		</table>
+		<div id="display_containers">
+			<div id="flashcard_creator_display_container" class="display_container"></div>
+			<div id="show_cards_display_container" class="display_container"></div>
+			<div id="study_container" class="display_container"></div>
+		</div>
+	</div>
+
+	<div id="instructions">
+		<h2>INSTRUCTIONS:</h2>
+		<p>- Press 'Add a flashcard' to begin.</p>
+		<p>- Front Word is the word to be studied.</p>
+		<p>- Back Word is the answer for the front word.</p>
+		<p>- You can see a list of all cards by clicking 'Show current cards'</p>
+		<p>- When you click 'Study' you will be given the cards in a random order.</p>
+		<p>- You can stop the study session by clicking outside of the shown card.</p>
 	</div>
 
 	<div id="inactive_items">
@@ -253,7 +286,7 @@
 				<tr id="front_interface">
 					<td id="card_answers_container">
 						<input type="text" id="answer_input">
-						<button id="answer_button">answer</button>
+						<button id="answer_button" class="small_button">answer</button>
 					</td>
 					<td id="card_buttons_container">
 						<button id="flip_button">flip</button>

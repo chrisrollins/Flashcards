@@ -366,6 +366,8 @@
 		(state.buttonEnabled(e.button) && [
 			function()
 			{
+				//left click
+				
 				const id = e.target.id;
 				const classes = e.target.className.split(" ");
 				if(!(mouseupEvents.ids[id] || {disabled: true}).disabled)
@@ -389,11 +391,11 @@
 			},
 			function()
 			{
-				console.log("middle click");
+				//middle click
 			},
 			function()
 			{
-				console.log("right click");
+				//right click
 			}
 		][e.button] || function(){})();
 	};

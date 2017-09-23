@@ -54,6 +54,7 @@
 		{
 			font-weight: bold;
 			font-size: 12px;
+			color: #333311;
 			background-color: #fafaba;
 			border: solid 3px #888833;
 		}
@@ -83,13 +84,18 @@
 		}
 		#instructions
 		{
-			width: 350px;
+			width: 100%;
 			margin-left: auto;
 			margin-right: auto;
 		}
 		#instructions h2
 		{
 			text-align: -webkit-center;
+		}
+		#instructions p
+		{
+			margin-top: 5px;
+			margin-left: 45%;
 		}
 		#display_containers
 		{
@@ -104,10 +110,6 @@
 			width: 410px;
 			margin-left: 5px;
 			/*border: 1px solid #00ffff;*/
-		}
-		.main_container_td
-		{
-			width: 400px;
 		}
 		#control_panel, #display_containers
 		{
@@ -147,8 +149,26 @@
 			filter: hue-rotate(-50deg) saturate(1.5);
 		}
 		#card_list
-		{
+		{	
 			text-align: -webkit-center;
+			height: 200px;
+			width: 70%;
+			border-bottom: 1px dashed #fff;
+			overflow-y: scroll;
+			margin-left: auto;
+			margin-right: auto;
+			border: 1px solid #666;
+			padding-top: 10px;
+			padding-right: 20px;
+		}
+		#card_list th
+		{
+			padding-bottom: 5px;
+			text-decoration: underline;
+		}
+		#card_list td
+		{
+			padding-left: 20px;
 		}
 		#inactive_items
 		{
@@ -160,8 +180,6 @@
 		}
 		td
 		{
-			/*border-bottom: 1px solid #fff;*/
-			margin: 0px;
 			text-align: center;
 		}
 		#current_flashcard
@@ -262,11 +280,11 @@
 
 	<div id="instructions">
 		<h2>INSTRUCTIONS:</h2>
-		<p>- Press 'Add a flashcard' to begin.</p>
+		<p>- Click <b>Add a flashcard</b> to begin.</p>
 		<p>- Front Word is the word to be studied.</p>
 		<p>- Back Word is the answer for the front word.</p>
-		<p>- You can see a list of all cards by clicking 'Show current cards'</p>
-		<p>- When you click 'Study' you will be given the cards in a random order.</p>
+		<p>- Click <b>Show current cards</b> to show all current cards.</p>
+		<p>- When you click <b>Study</b> you will be given the cards in a random order.</p>
 		<p>- You can stop the study session by clicking outside of the shown card.</p>
 	</div>
 
